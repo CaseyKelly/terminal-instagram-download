@@ -14,7 +14,6 @@ func main() {
 	if *url == "" {
 		fmt.Println("Use the -url flag and provide an instagram url")
 	} else {
-		fmt.Println("url: ", *url)
 		resp, err := http.Get(*url)
 		if err != nil {
 			panic(err)
