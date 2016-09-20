@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 )
 
 func main() {
@@ -13,5 +15,12 @@ func main() {
 		fmt.Println("Use the -url flag and provide an instagram url")
 	} else {
 		fmt.Println("url: ", *url)
+		resp, err := http.Get(*url)
+		if err != nil {
+			panic(err)
+		}
+		defer resp.Body.Close()
+		body, err := ioutil.ReadAll(resp.Body)
+		fmt.Println("get:\n", string(body))
 	}
 }
