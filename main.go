@@ -9,5 +9,9 @@ func main() {
 	url := flag.String("url", "", "url of instagram photo")
 	flag.Parse()
 
-	fmt.Println("url: ", *url)
+	if *url == "" {
+		fmt.Println("Use the -url flag and provide an instagram url")
+	} else {
+		fmt.Println("url: ", *url)
+	}
 }
