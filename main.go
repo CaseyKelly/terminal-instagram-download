@@ -36,6 +36,9 @@ func main() {
 				defer resp.Body.Close()
 				body, err := ioutil.ReadAll(resp.Body)
 				err = ioutil.WriteFile("photo.jpg", body, 0644)
+				if err != nil {
+					panic(err)
+				}
 			}
 		}
 	}
