@@ -29,7 +29,13 @@ func main() {
 
 		for i := 0; i < (len(splitHTML)); i++ {
 			if strings.Contains(splitHTML[i], "og:image") {
-				fmt.Println(splitHTML[i+2])
+				resp, err := http.Get(splitHTML[i+2])
+				if err != nil {
+					panic(err)
+				}
+				defer resp.Body.Close()
+				body, err := ioutil.ReadAll(resp.Body)
+				err = ioutil.WriteFile("photo.jpg", body, 0644)
 			}
 		}
 	}
