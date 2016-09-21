@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 func main() {
@@ -24,6 +25,12 @@ func main() {
 		defer resp.Body.Close()
 		body, err := ioutil.ReadAll(resp.Body)
 
-		fmt.Println("get:\n", string(body))
+		splitHTML := strings.Split(string(body), "\"")
+
+		for i := 0; i < (len(splitHTML)); i++ {
+			if strings.Contains(splitHTML[i], "og:image") {
+				fmt.Println(splitHTML[i+2])
+			}
+		}
 	}
 }
